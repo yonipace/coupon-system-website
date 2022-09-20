@@ -67,7 +67,7 @@ const useAdminService = () => {
   const updateCompany = async (company: CompanyModel) => {
     // Senf company to server for update
     const response = await axios.put<CompanyModel>(
-      appConfig.adminCompaniesUrl + company.id,
+      appConfig.adminCompaniesUrl,
       company
     );
     const updatedCompany = response.data;
@@ -77,7 +77,11 @@ const useAdminService = () => {
 
   const deleteCompany = async (id: number) => {
     // Delete in backend
-    await axios.delete(appConfig.adminCompaniesUrl + id);
+    await axios.delete(appConfig.adminCompaniesUrl, {
+      params: {
+        id,
+      },
+    });
     dispatch(removeCompany(id));
   };
   const getAllCustomers = async () => {
@@ -121,7 +125,7 @@ const useAdminService = () => {
   const updateCustomer = async (customer: CustomerModel) => {
     // Senf customer to server for update
     const response = await axios.put<CustomerModel>(
-      appConfig.adminCustomersUrl + customer.id,
+      appConfig.adminCustomersUrl,
       customer
     );
     const updatedCustomer = response.data;
@@ -131,7 +135,7 @@ const useAdminService = () => {
 
   const deleteCustomer = async (id: number) => {
     // Delete in backend
-    await axios.delete(appConfig.adminCustomersUrl + id);
+    await axios.delete(appConfig.adminCustomersUrl, { params: { id } });
     dispatch(removeCustomer(id));
   };
 

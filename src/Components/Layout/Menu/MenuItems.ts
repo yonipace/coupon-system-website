@@ -28,11 +28,11 @@ export const adminMenuItems = [
     link: "/admin/customers",
     icon: GroupIcon,
   },
-  {
-    text: "Add New Client",
-    link: "/admin/add",
-    icon: AddCircleIcon,
-  },
+  // {
+  //   text: "Add New Client",
+  //   link: "/admin/add",
+  //   icon: AddCircleIcon,
+  // },
 ];
 export const companyMenuItems = [
   {
@@ -45,11 +45,11 @@ export const companyMenuItems = [
     link: "/company/coupons",
     icon: LocalActivityIcon,
   },
-  {
-    text: "Add Coupon",
-    link: "/company/coupons/add",
-    icon: AddCircleIcon,
-  },
+  // {
+  //   text: "Add Coupon",
+  //   link: "/company/coupons/add",
+  //   icon: AddCircleIcon,
+  // },
 ];
 export const customerMenuItems = [
   {

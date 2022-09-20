@@ -1,4 +1,11 @@
-import { Box, CssBaseline, Divider, Drawer, Toolbar } from "@mui/material";
+import {
+  Box,
+  CssBaseline,
+  Divider,
+  Drawer,
+  Toolbar,
+  Typography,
+} from "@mui/material";
 
 const Footer = () => {
   const drawerHeight = "100px";
@@ -16,7 +23,11 @@ const Footer = () => {
             flexShrink: 0,
           }}
         >
-          <Toolbar>Footer</Toolbar>
+          <Toolbar sx={{ justifyContent: "center" }}>
+            <Typography>
+              © Yonatan Pace - Final Project for Java-Full Stack course
+            </Typography>
+          </Toolbar>
           <Divider />
         </Drawer>
       </Box>

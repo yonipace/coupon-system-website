@@ -14,8 +14,9 @@ const AlertPopup = () => {
         severity={type}
         sx={{
           position: "fixed",
-          top: "50px",
-          left: "30%",
+          top: "80px",
+          left: "40%",
+          right: "40%",
           zIndex: 10,
         }}
       >

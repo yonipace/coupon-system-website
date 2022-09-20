@@ -16,6 +16,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import useCompanyService from "../../../Hooks/useCompanyService";
 import { Category, CouponModel } from "../../../Models/CouponModel";
 import useNotificationService from "../../../Hooks/useNotificationService";
+import useAlert from "../../../Hooks/useAlert";
 
 const UpdateCoupon = (props: CouponModel) => {
   const [open, setOpen] = useState(false);

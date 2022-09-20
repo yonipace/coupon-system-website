@@ -1,13 +1,11 @@
 import { AppBar, Button, Toolbar, Typography } from "@mui/material";
-import jwtDecode from "jwt-decode";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, NavLink, useNavigate } from "react-router-dom";
-import { logout, TokenValues } from "../../Redux/Reducers/authSlice";
+import { NavLink, useNavigate } from "react-router-dom";
+import { logout } from "../../Redux/Reducers/authSlice";
 import { RootState } from "../../Redux/Store/Store";
 import { getDetails } from "../../Service/DetailService";
 
 const Header = () => {
-  const state = useSelector((state: RootState) => state);
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
   const dispatch = useDispatch();

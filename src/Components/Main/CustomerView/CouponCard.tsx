@@ -69,8 +69,12 @@ const CouponCard = (props: CouponModel) => {
         />
 
         <CardContent>
+          <Typography variant="body2" sx={{ my: 1 }}>
+            Price: {props.price + "$"}
+          </Typography>
+
           <Typography variant="body2" color="text.body2">
-            {props.description}
+            Description: {props.description}
           </Typography>
         </CardContent>
 
@@ -87,10 +91,6 @@ const CouponCard = (props: CouponModel) => {
             <Stack spacing={1}>
               <Typography variant="subtitle1">
                 issued by: {props.company.name}
-              </Typography>
-              <Divider />
-              <Typography variant="body2">
-                Price: {props.price + "$"}
               </Typography>
               <Divider />
               <Typography variant="body2">Amount: {props.amount}</Typography>

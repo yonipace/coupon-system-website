@@ -11,9 +11,13 @@ import {
   Collapse,
   Typography,
   Button,
+  TextField,
+  FormControl,
+  Select,
+  MenuItem,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { CouponModel } from "../../../Models/CouponModel";
+import { Category, CouponModel } from "../../../Models/CouponModel";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import useCustomerService from "../../../Hooks/useCustomerService";
@@ -23,9 +27,14 @@ import useNotificationService from "../../../Hooks/useNotificationService";
 const PurchasedCoupons = () => {
   const { getAllCoupons } = useCustomerService();
   const [coupons, setCoupons] = useState<CouponModel[]>([]);
+  const [couponsToMap, setCouponsToMap] = useState<CouponModel[]>(coupons);
+  const [category, setCategory] = useState<string>("");
+  const [maxPrice, setMaxPrice] = useState(0);
   const [isRowOpen, setIsRowOpen] = useState(false);
   const { setAlert } = useAlert();
   const { getErrorMessage } = useNotificationService();
+
+  const categories = Object.keys(Category).filter((v) => !isNaN(Number(v)));
 
   useEffect(() => {
     (async () => {
@@ -33,8 +42,22 @@ const PurchasedCoupons = () => {
         (arr) => setCoupons(arr),
         (err) => setAlert(getErrorMessage(err), "error")
       );
+      doFilter();
     })();
   }, [getAllCoupons, getErrorMessage, setAlert]);
+
+  const doFilter = () => {
+    let filterCoupons = coupons;
+    if (maxPrice > 0) {
+      filterCoupons = coupons.filter((c) => c.price <= maxPrice);
+    }
+    if (category !== "") {
+      filterCoupons = filterCoupons.filter(
+        (c) => c.category.toString() === Category[parseInt(category)]
+      );
+    }
+    setCouponsToMap(filterCoupons);
+  };
 
   return (
     <>
@@ -44,7 +67,45 @@ const PurchasedCoupons = () => {
         alignItems="flex-start"
         px={2}
       >
-        <h2>Purchased Coupons</h2>
+        <h2>Purchased Coupons </h2>
+
+        <Stack direction="row" spacing={2} sx={{ mt: 2 }}>
+          <TextField
+            label="max price"
+            size="small"
+            type="number"
+            onChange={(e) => {
+              setMaxPrice(parseFloat(e.target.value));
+            }}
+          />
+          <FormControl>
+            <Select
+              size="small"
+              value={category}
+              // label="Category"
+              onChange={(e) => setCategory(e.target.value.toString())}
+            >
+              {categories.map((k: any) => (
+                <MenuItem value={categories.indexOf(k)}>
+                  {Category[categories.indexOf(k)].toLowerCase()}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          {/* <Button variant="contained" size="small" onClick={doFilter}>
+            Filter
+          </Button> */}
+          <Button
+            variant="outlined"
+            onClick={() => {
+              setCouponsToMap(coupons);
+              setMaxPrice(0);
+              setCategory("");
+            }}
+          >
+            clear filters
+          </Button>
+        </Stack>
       </Stack>
       <Container
         component={Card}
@@ -85,7 +146,7 @@ const PurchasedCoupons = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {coupons.map((row) => (
+              {couponsToMap.map((row) => (
                 <>
                   <TableRow key={row.id}>
                     <TableCell>{row.title}</TableCell>

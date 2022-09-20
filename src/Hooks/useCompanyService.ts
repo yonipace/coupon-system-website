@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { CouponModel } from "../Models/CouponModel";
-
+import { Category, CouponModel } from "../Models/CouponModel";
 import {
   addCouponToStore,
   removeCoupon,
@@ -68,10 +67,25 @@ const useCompanyService = () => {
     // Delete in backend
     await axios.delete(appConfig.companyCouponsUrl, {
       params: {
-        id,
+        couponId: id,
       },
     });
     dispatch(removeCoupon(id));
+  };
+
+  const getCouponsByCategory = async (category: Category) => {
+    const couponsByCategory = couponList.filter(
+      (c) => c.category.toString() === Category[category]
+    );
+
+    console.log(couponList);
+
+    console.log(couponsByCategory);
+    return couponsByCategory;
+  };
+  const getCouponsByprice = async (price: number) => {
+    const couponsByPrice = couponList.filter((c) => c.price <= price);
+    return couponsByPrice;
   };
 
   return {
@@ -80,6 +94,8 @@ const useCompanyService = () => {
     addCoupon,
     updateCoupon,
     deleteCoupon,
+    getCouponsByCategory,
+    getCouponsByprice,
   };
 };
 

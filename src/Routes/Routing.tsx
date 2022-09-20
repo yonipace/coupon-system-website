@@ -2,7 +2,6 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import CompaniesView from "../Components/Main/AdminView/CompaniesView";
 import CustomersView from "../Components/Main/AdminView/CustomersView";
 import CouponsView from "../Components/Main/CompanyView/CouponsView";
-import CompanyView from "../Components/Main/CompanyView/MainView";
 import CouponMarket from "../Components/Main/CustomerView/CouponMarket";
 import PurchasedCoupons from "../Components/Main/CustomerView/PurchasedCoupons";
 import Home from "../Components/Main/Home/Home";
@@ -23,7 +22,6 @@ const Routing = () => {
       </Route>
       <Route element={<CompanyRoutes />}>
         {/* <Route path="/home" element={<Home />} /> */}
-        <Route path="/company" element={<CompanyView />} />
         <Route path="/company/coupons" element={<CouponsView />} />
         <Route path="/*" element={<Navigate to="/home" />} />
       </Route>

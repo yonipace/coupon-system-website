@@ -15,6 +15,7 @@ import useAlert from "../../../Hooks/useAlert";
 import useNotificationService from "../../../Hooks/useNotificationService";
 
 export interface UpdateClientFormProps {
+  id: number;
   open?: boolean;
   email: string;
   password: string;
@@ -45,11 +46,22 @@ const UpdateClient = (props: UpdateClientFormProps) => {
     e.preventDefault();
     try {
       if (props.client === Role.COMPANY) {
-        await updateCompany({ name: companyName, email, password });
+        await updateCompany({
+          id: props.id,
+          name: companyName,
+          email,
+          password,
+        });
         setAlert("company updated successfully!", "success");
       }
       if (props.client === Role.CUSTOMER) {
-        await updateCustomer({ firstName, lastName, email, password });
+        await updateCustomer({
+          id: props.id,
+          firstName,
+          lastName,
+          email,
+          password,
+        });
         setAlert("customer updated successfully!", "success");
       }
     } catch (e: any) {
@@ -90,6 +102,8 @@ const UpdateClient = (props: UpdateClientFormProps) => {
                 <TextField
                   label="Name"
                   variant="outlined"
+                  disabled
+                  helperText={"name can not be updated"}
                   fullWidth
                   onChange={(e) => setCompanyName(e.target.value)}
                   value={companyName}
@@ -124,8 +138,6 @@ const UpdateClient = (props: UpdateClientFormProps) => {
                 variant="outlined"
                 type="email"
                 fullWidth
-                disabled
-                helperText={"email can not be updated"}
                 onChange={(e) => setEmail(e.target.value)}
                 value={email}
               ></TextField>

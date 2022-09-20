@@ -14,10 +14,10 @@ export interface CouponModel {
 }
 
 export enum Category {
-  "ELECTRICITY",
-  "FOOD",
-  "RESTAURANT",
-  "VACATION",
-  "HOTEL",
-  "CARS",
+  ELECTRICITY,
+  FOOD,
+  RESTAURANT,
+  VACATION,
+  HOTEL,
+  CARS,
 }
