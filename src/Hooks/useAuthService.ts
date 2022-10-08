@@ -20,13 +20,10 @@ const useAuthService = () => {
     console.log(appConfig.registerUrl + Role[role].toLowerCase());
 
     const token = response.data;
-    console.log(token);
     // save the received token in global state
     dispatch(register(token));
   };
   const loginClient = async (credentials: CredentialsModel) => {
-    console.log(credentials);
-
     const response = await axios.post<string>(appConfig.loginUrl, credentials);
     const token = response.data;
     console.log(token);

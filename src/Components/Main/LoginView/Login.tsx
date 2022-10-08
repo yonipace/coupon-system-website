@@ -6,7 +6,6 @@ import {
   Container,
   Grid,
   Link,
-  Typography,
   CardHeader,
 } from "@mui/material";
 import { SyntheticEvent, useState } from "react";
@@ -16,8 +15,6 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
-import { CredentialsModel } from "../../../Models/CredentialsModel";
-import authService from "../../../Service/AuthService";
 import { Role } from "../../../Redux/Reducers/authSlice";
 import useAuthService from "../../../Hooks/useAuthService";
 import useAlert from "../../../Hooks/useAlert";
@@ -34,6 +31,7 @@ const Login = () => {
 
   const handleSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
+
     try {
       await loginClient({ email, password, role: Role[client] });
       setAlert("Welcome Back!", "success");
