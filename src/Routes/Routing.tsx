@@ -35,7 +35,8 @@ const Routing = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/home" element={<Home />} />
-      <Route path="/*" element={<Navigate to="/login" />} />
+      <Route path="/" element={<Home />} />
+      <Route path="/*" element={<Navigate to="/" />} />
     </Routes>
   );
 };
